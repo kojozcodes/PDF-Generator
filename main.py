@@ -7,16 +7,16 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen import canvas
 
 car_data = {
-    "Byd": ["Sealion 7"],
-    "Hyundai": ["Ioniq 5", "Tucson"],
-    "Kia": ["Niro EV", "Sportage", "EV6"],
-    "MG": ["MG 5", "MG-ZS"],
-    "Nissan": ["Leaf", "Ariya"],
+    "BYD": ["Sealion 7"],
+    "Hyundai": ["Ioniq", "Tucson"],
+    "Kia": ["EV6", "Niro EV", "Sportage", "Xeed"],
+    "MG": ["MG-5", "MG-ZS"],
+    "Nissan": ["Ariya", "Leaf"],
     "Polestar": ["Polestar 2"],
-    "Skoda": ["Enyaq"],
+    "Skoda": ["Enyaq", "Octavia"],
     "Tesla": ["Model 3", "Model Y"],
-    "Toyota": ["BZ4X"],
-    "Volkswagen": ["ID.3", "ID-4", "ID-7", "ID-Buzz"]
+    "Toyota": ["BZ4X", "Corolla", "Prius"],
+    "Volkswagen": ["ID3", "ID4", "ID7", "ID-Buzz"]
 }
 
 
@@ -54,7 +54,7 @@ def generate_certificate(
         c.setFillColorRGB(0.9, 0, 0)  # red
 
     # Draw rectangle behind the text
-    c.rect(507 - 2, (height - 214) - 5, text_width + 6, 14 + 6, fill=1, stroke=0)
+    c.roundRect(504 - 2, (height - 214) - 5, text_width + 12, 14 + 6, radius=6, fill=1, stroke=0)
 
     # Now draw the text in white on top
     c.setFont("Helvetica-Bold", 14)
