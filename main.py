@@ -59,7 +59,11 @@ def generate_certificate(
     # Gauge settings
     center_x, center_y = width / 2, height - 740
     radius = 65
-    percent_value = int(state_of_health)
+    # Clean state_of_health string
+    try:
+        percent_value = int(str(state_of_health).replace("%", "").strip())
+    except ValueError:
+        percent_value = 0  # fallback if input is invalid
 
     # Draw background circle (light grey outline)
     c.setStrokeColorRGB(0.8, 0.8, 0.8)
