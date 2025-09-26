@@ -6,6 +6,20 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen import canvas
 
+car_data = {
+    "Kia": ["Niro EV", "Sportage", "EV6"],
+    "Byd": ["Sealion 7"],
+    "Skoda": ["Enyaq"],
+    "Nissan": ["Leaf", "Ariya"],
+    "Toyota": ["BZ4X"],
+    "Hyundai": ["Ioniq 5", "Tucson"],
+    "Tesla": ["Model 3", "Model Y"],
+    "Polestar": ["Polestar 2"],
+    "MG": ["MG 5", "MG-ZS"],
+    "Volkswagen": ["ID.3", "ID-4", "ID-7", "ID-Buzz"]
+}
+
+
 # Certificate generator
 def generate_certificate(
     test_date, tested_by, status,
@@ -14,6 +28,7 @@ def generate_certificate(
     output="certificate.pdf",
     template="certificate_bg.jpg"
 ):
+
     c = canvas.Canvas(output, pagesize=A4)
     width, height = A4  # 595 x 842 pts
 
@@ -107,8 +122,8 @@ st.title("🔋 Battery Health Certificate Generator")
 test_date = st.date_input("Test date", value=date.today()).strftime("%d/%m/%Y")
 tested_by = st.text_input("Tested by", "")
 status = st.selectbox("Battery Status", ["Excellent", "Good", "Bad"])
-make = st.text_input("Make", "")
-model = st.text_input("Model", "")
+make = st.selectbox("Make", list(car_data.keys()))
+model = st.selectbox("Model", car_data[make])
 registration = st.text_input("Registration", "")
 first_registered = st.date_input("First Registered", value=date(2021, 10, 28)).strftime("%d/%m/%Y")
 vin = st.text_input("VIN", "")
