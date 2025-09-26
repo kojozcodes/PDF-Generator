@@ -1,6 +1,9 @@
 import os
+from datetime import date
+
 import streamlit as st
 from reportlab.lib.pagesizes import A4
+from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen import canvas
 
 # Certificate generator
@@ -23,6 +26,24 @@ def generate_certificate(
     c.setFillColorRGB(1, 1, 1)
     c.drawString(80, height - 214, f"{test_date}")
     c.drawString(287, height - 214, f"{tested_by}")
+
+    # Measure width of the status text
+    text_width = stringWidth(status, "Helvetica-Bold", 14)
+
+    # Pick background color based on status
+    if status == "Excellent":
+        c.setFillColorRGB(0, 0.7, 0)  # green
+    elif status == "Good":
+        c.setFillColorRGB(1, 0.65, 0)  # amber
+    else:
+        c.setFillColorRGB(0.9, 0, 0)  # red
+
+    # Draw rectangle behind the text
+    c.rect(507 - 2, (height - 214) - 5, text_width + 6, 14 + 6, fill=1, stroke=0)
+
+    # Now draw the text in white on top
+    c.setFont("Helvetica-Bold", 14)
+    c.setFillColorRGB(1, 1, 1)  # white text
     c.drawString(507, height - 214, f"{status}")
 
     c.setFillColorRGB(0, 0, 0)
@@ -79,14 +100,13 @@ def generate_certificate(
 # ----------------- STREAMLIT APP -----------------
 st.title("🔋 Battery Health Certificate Generator")
 
-test_date = st.text_input("Test date", "")
+test_date = st.date_input("Test date", value=date.today()).strftime("%d/%m/%Y")
 tested_by = st.text_input("Tested by", "")
-status = st.text_input("Battery Status", "")
-
+status = st.selectbox("Battery Status", ["Excellent", "Good", "Bad"])
 make = st.text_input("Make", "")
 model = st.text_input("Model", "")
 registration = st.text_input("Registration", "")
-first_registered = st.text_input("First Registered", "")
+first_registered = st.date_input("First Registered", value=date(2021, 10, 28)).strftime("%d/%m/%Y")
 vin = st.text_input("VIN", "")
 mileage = st.text_input("Mileage", "")
 
