@@ -117,6 +117,12 @@ def generate_certificate(
 
 
 # ----------------- STREAMLIT APP -----------------
+st.set_page_config(
+    page_title="Battery Health Certificate",   # Tab title
+    page_icon="🔋",                            # Favicon (emoji or image file)
+    layout="centered"                          # or "wide"
+)
+
 st.title("🔋 Battery Health Certificate Generator")
 
 test_date = st.date_input("Test date", value=date.today()).strftime("%d/%m/%Y")
