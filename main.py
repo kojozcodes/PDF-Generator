@@ -121,16 +121,24 @@ st.title("🔋 Battery Health Certificate Generator")
 
 test_date = st.date_input("Test date", value=date.today()).strftime("%d/%m/%Y")
 tested_by = st.text_input("Tested by", "")
-status = st.selectbox("Battery Status", ["Excellent", "Good", "Bad"])
 make = st.selectbox("Make", sorted(car_data.keys()))
 model = st.selectbox("Model", sorted(car_data[make]))
 registration = st.text_input("Registration", "")
 first_registered = st.date_input("First Registered", value=date(2021, 10, 28)).strftime("%d/%m/%Y")
 vin = st.text_input("VIN", "")
 mileage = st.text_input("Mileage", "")
-
 battery = st.text_input("Battery (kWh)", "")
-state_of_health = st.text_input("State of Health (%)", "")
+
+# State of Health as slider
+state_of_health = st.slider("State of Health (%)", 0, 100, 90)
+
+# Auto-calculate Battery Status from percentage
+if state_of_health >= 85:
+    status = "Excellent"
+elif state_of_health >= 65:
+    status = "Good"
+else:
+    status = "Bad"
 
 if st.button("Generate Certificate"):
     filename = "certificate.pdf"
