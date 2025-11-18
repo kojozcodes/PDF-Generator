@@ -139,8 +139,6 @@ This is beyond my control, but I remain committed to supporting you.
 Thank you for your understanding and patience.
 """)
 
-st.title("🏡 Care Home Monthly Activities – Editable Preview & A3 PDF")
-
 st.title("🔋 Battery Health Certificate Generator")
 
 test_date = st.date_input("Test date", value=date.today()).strftime("%d/%m/%Y")
