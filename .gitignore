@@ -1,3 +1,72 @@
-/.venv/
-/.idea/
-certificate.pdf
+# Environment variables (contains sensitive Cloudinary credentials)
+.env
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Generated certificates (temporary files)
+certificate*.pdf
+temp_cert*.pdf
+test_certificate*.pdf
+temp_qr.png
+
+# Background images (if you don't want to commit them)
+# certificate_bg.jpg
+# certificate_bg_2.png
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# UV/pip
+uv.lock
+*.egg-info/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Docker
+.devcontainer/
